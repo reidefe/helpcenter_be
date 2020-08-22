@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/helpcenter-be
+    ports:
+      - 8000:8000
+    env_file:
+      - ./env/django/.env.dev
+    depends_on:
+      - global_db
+      - articles_db
+      - guides_db
+      - ideas_db
+
+  global_db:
+    image: postgres:12.0-alpine
+    volumes:
+      - global_db_volume:/var/lib/postgresql/data/
+    env_file:
+      - ./env/db/global_db.env
+      
+  articles_db:
+    image: postgres:12.0-alpine
+    volumes:
+      - articles_db_volume:/var/lib/postgresql/data/
+    env_file:
+      - ./env/db/articles_db.env
+
+  guides_db:
+    image: postgres:12.0-alpine
+    volumes:
+      - guides_db_volume:/var/lib/postgresql/data/
+    env_file:
+      - ./env/db/guides_db.env
+
+  ideas_db:
+    image: postgres:12.0-alpine
+    volumes:
+      - ideas_db_volume:/var/lib/postgresql/data/
+    env_file:
+      - ./env/db/ideas_db.env
+    
+volumes:
+  global_db_volume:
+  articles_db_volume:
+  guides_db_volume:
+  ideas_db_volume:
+

@@ -1,34 +1,23 @@
-# boomfront-fe
+# helpcenter-fe
 
-## Project setup
+## [Development Environment] Docker build and project startup
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+docker-compose up --build
 ```
 
-### Compiles and minifies for production
+## [Production Environment] Docker build and project startup
 ```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
+docker-compose docker-compose.prod.yml up --build
 ```
 
-### Run your end-to-end tests
+### [Development Environment] Execute Django commands
 ```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
+docker-compose exec web python 'django commands' for example:
+docker-compose exec web python manage.py migrate
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### [Production Environment] Execute Django commands
+```
+docker-compose docker-compose.prod.yml exec web python 'django commands' for example:
+docker-compose docker-compose.prod.yml exec web python manage.py migrate
+```

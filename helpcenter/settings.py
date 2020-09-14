@@ -32,14 +32,35 @@ ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 # Application definition
 
 INSTALLED_APPS = [
+    'articles.apps.ArticlesConfig',
+    'Ideas.apps.IdeasConfig',
+    'guides.apps.GuidesConfig'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'fluent_comments',
+    'threadedcomments',
+    'django_comments',
+    'django.contrib.sites',
+    'django.contrib.comments',
+    'rest_framework.authtoken'
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        
+    ],
 
+    'DEFAULT_PERMISSION_CLASSES':(
+                'rest_framework.permissions.IsAuthenticated',
+    ),
+
+}
+AUTH_USER_MODEL = 'account.'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
